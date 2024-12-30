@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Access</title>
+  <script>
+    // JavaScript to detect device type
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      alert("Please fill out the form on a PC.");
+      window.location.href = "https://example.com/pc-only"; // URL for mobile users
+    }
+  </script>
+</head>
+<body>
+  <h1>Welcome to the Form</h1>
+  <p>If you're seeing this, you are on a PC. <a href="https://forms.office.com/pages/responsepage.aspx?id=sQxdbJqI_UawnwViZ-JWh4sIZrheyTFOtnhgt26CzAlUMUVPR1FKRjZCM0FLUkZPMDRBQlNQN0ZFUyQlQCN0PWcu&origin=lprLink&route=shorturl">Click here to fill out the form.</a></p>
+</body>
+</html>
