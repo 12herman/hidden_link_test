@@ -3,17 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Access</title>
-  <script>
-    // JavaScript to detect device type
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      alert("Please fill out the form on a PC.");
-      window.location.href = "https://example.com/pc-only"; // URL for mobile users
+  <title>PC-Only Form Access</title>
+  <link rel="icon" href="./1d7c66_5326f3b0f9e5419fa3bf19125ec1b33b~mv2.ico" type="image/x-icon">
+  <style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
-  </script>
+
+    /* Hide the form link by default */
+    #form-link {
+      display: none;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Warning message styling */
+    #warning-message {
+      display: none;
+      color: red;
+      text-align: center;
+      font-size: 12px;
+     
+    }
+  </style>
 </head>
-<body>
-  <h1>Welcome to the Form</h1>
-  <p>If you're seeing this, you are on a PC. <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=sQxdbJqI_UawnwViZ-JWh4sIZrheyTFOtnhgt26CzAlUNkhHTEo5R1RFSUdIWjBCNVFWV0Y5R1BZNCQlQCN0PWcu">Click here to fill out the form.</a></p>
+<body style="display: flex; width: 90%; margin: auto; height: 90vh; flex-direction: column; justify-content: center; align-items: center;">
+    <img src="./1d7c66_5326f3b0f9e5419fa3bf19125ec1b33b~mv2.avif" alt="conexra logo"/>
+  <h2 style="text-align: center;">Welcome to the Form Page</h2>
+  <!-- <p style="text-align: center; font-size: 14px;">This form is accessible only on Windows devices.</p> -->
+
+  <!-- Hidden form link -->
+  <div id="form-link">
+    <p>Click below to access the form:</p>
+    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=sQxdbJqI_UawnwViZ-JWh4sIZrheyTFOtnhgt26CzAlUNkhHTEo5R1RFSUdIWjBCNVFWV0Y5R1BZNCQlQCN0PWcu" target="_blank">
+      Open the Form
+    </a>
+  </div>
+
+  <!-- Warning message for non-Windows users -->
+  <div id="warning-message">This form can only be accessed on a Windows PC within your company's network. Please ensure you are using an authorized device.</div>
+
+  <script>
+    // Function to check if the device is running Windows
+    function isWindowsDevice() {
+      const platform = navigator.platform.toLowerCase();
+      return platform.includes('win'); // Check if the platform includes "win"
+    }
+
+    // Function to control the visibility of the form link based on device type
+    function controlFormAccess() {
+      const formLink = document.getElementById("form-link");
+      const warningMessage = document.getElementById("warning-message");
+
+      // If the device is Windows, show the form link
+      if (isWindowsDevice()) {
+        formLink.style.display = "block";
+        warningMessage.style.display = "none";
+      } else {
+        // If not Windows, hide the form link and show the warning
+        formLink.style.display = "none";
+        warningMessage.style.display = "block";
+      }
+    }
+
+    // Initialize functions on page load
+    window.onload = controlFormAccess;
+
+    // Prevent right-click context menu
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
+    // Disable F12 (DevTools) and other shortcuts
+    document.onkeydown = function (e) {
+      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C'))) {
+        e.preventDefault(); // Block developer tools opening
+        alert("Inspecting elements is disabled.");
+      }
+    };
+  </script>
 </body>
 </html>
